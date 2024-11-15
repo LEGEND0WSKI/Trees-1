@@ -1,7 +1,7 @@
 # // Time Complexity :O(n) for nodes
 # // Space Complexity :O(n)+h for recursion stack and hashmap
 # // Did this code successfully run on Leetcode :Yes
-# // Any problem you faced while coding this :   I was incrementing hashmap indedx incorrectly(i++)
+# // Any problem you faced while coding this :   I was incrementing hashmap inorder index incorrectly(i++)
 
 # My approach should be popping an array while other is hashed
 # // Your code here along with comments explaining your approach
