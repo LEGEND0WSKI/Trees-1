@@ -1,16 +1,15 @@
-# // Time Complexity :
-# // Space Complexity :
-# // Did this code successfully run on Leetcode :
-# // Any problem you faced while coding this :
+# // Time Complexity : O(n), every node is visited only once
+# // Space Complexity :O(h) due to recursion stack//o(logn) for balanced
+# // Did this code successfully run on Leetcode :Yes
+# // Any problem you faced while coding this : 
 
 
 # // Your code here along with comments explaining your approach
-# We will use recursion to check left and right side of the node let us say node is on 13. left node bounds will be (-inf,13).
-# right bound will be (13,inf) 
+# We will use recursion to check left and right side of the node.
+# Let us say node is on 13. left node bounds will be (-inf,13).
+# right bound will be (13,inf). As long as the number is inbounds we can verify it.
 
 
-
-# 
 # from typing import Optional
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -24,85 +23,85 @@ class Solution:                                                     #(-inf,13) a
 
 
     def helper(self,root,minVal:float,maxVal:float):
-        if root == None:
+        if root == None:                                        # base case
             return True
         
-        if root.val >= maxVal or root.val <= minVal:
+        if root.val >= maxVal or root.val <= minVal:            # root.val beyond(-inf, inf)
             return False
         
-        return self.helper(root.left,minVal,root.val) and self.helper(root.right,root.val,maxVal)
+        return self.helper(root.left,minVal,root.val) and self.helper(root.right,root.val,maxVal) # checks left first
 
-# using a flag(void bsed)
-class Solution:
-    def __init__(self):
-        self.prev = None                                    #need a prev node to keep track of last ancestor/dababy
+# # using a flag(void bsed)
+# class Solution:
+#     def __init__(self):
+#         self.prev = None                                    #need a prev node to keep track of last ancestor/dababy
 
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        self.flag = True
-        self.helper(root)
-        return self.flag
+#     def isValidBST(self, root: Optional[TreeNode]) -> bool:
+#         self.flag = True
+#         self.helper(root)
+#         return self.flag
 
-    def helper(self,root):
-        if root == None:                                    # root == None or not self.flag
-            return True
+#     def helper(self,root):
+#         if root == None:                                    # root == None or not self.flag
+#             return True
 
-        self.helper(root.left)
+#         self.helper(root.left)
 
-        if self.prev != None and self.prev.val >= root.val: # 
-            self.flag = False
-            # return True -> faster? why 
+#         if self.prev != None and self.prev.val >= root.val: # 
+#             self.flag = False
+#             # return True -> faster? why 
 
-        self.prev = root
-        self.helper(root.right)
+#         self.prev = root
+#         self.helper(root.right)
 
         
 #boolean based recur
-class Solution:
-    def __init__(self):
-        self.prev = None
+# class Solution:
+#     def __init__(self):
+#         self.prev = None
 
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        return self.helper(root)                                    #return the helper itself
+#     def isValidBST(self, root: Optional[TreeNode]) -> bool:
+#         return self.helper(root)                                    #return the helper itself
 
-    def helper(self,root):
-        if root == None:
-            return True
+#     def helper(self,root):
+#         if root == None:
+#             return True
 
-        left = self.helper(root.left)
-        if self.prev != None and self.prev.val >= root.val:
-            return False
+#         left = self.helper(root.left)
+#         if self.prev != None and self.prev.val >= root.val:
+#             return False
         
-        self.prev = root
+#         self.prev = root
 
-        right = self.helper(root.right)
+#         right = self.helper(root.right)
         
-        return left and right                                       #calculate in the helper
+#         return left and right                                       #calculate in the helper
 
-#conditional recursion:
-class Solution:
-    def __init__(self):
-        self.prev = None
+#conditional recursion: BEST HERE FOR RUNTIME
+# class Solution:
+#     def __init__(self):
+#         self.prev = None
 
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        return self.helper(root)
+#     def isValidBST(self, root: Optional[TreeNode]) -> bool:
+#         return self.helper(root)
 
-    def helper(self,root):
-        if root == None:
-            return True
+#     def helper(self,root):
+#         if root == None:
+#             return True
 
-        left = self.helper(root.left)
+#         left = self.helper(root.left)
 
-        if left == False:                                   #if out left has already found a breach, why do we check the right?
-            return False
+#         if left == False:                                   #if out left has already found a breach, why do we check the right?
+#             return False
 
-        if self.prev != None and self.prev.val >= root.val:
-            return False
+#         if self.prev != None and self.prev.val >= root.val:
+#             return False
         
-        self.prev = root
+#         self.prev = root
 
-        right = self.helper(root.right)
+#         right = self.helper(root.right)
 
-        return left and right
+#         return left and right
 
 
 
